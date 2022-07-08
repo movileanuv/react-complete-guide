@@ -1,5 +1,6 @@
 import './Expenses.css'
 import ExpenseItem from "./ExpenseItem";
+import Card from "./Card";
 
 function Expenses(props) {
   const expenses = props.expenses.map(el => {
@@ -9,9 +10,9 @@ function Expenses(props) {
       date={el.date}/>
   })
   return (
-    <div className={'expenses'}>
+    <Card className={'expenses'}>
       {expenses}
-    </div>
+    </Card>
   )
 }
 
