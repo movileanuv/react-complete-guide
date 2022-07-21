@@ -1,7 +1,7 @@
 import './ExpenseForm.css'
 import {useState} from "react";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState('')
   const [enteredAmount, setEnteredAmount] = useState('')
   const [enteredDate, setEnteredDate] = useState('')
@@ -25,6 +25,7 @@ function ExpenseForm() {
       amount: enteredAmount,
       date: new Date(enteredDate)
     }
+    props.onSaveExpenseForm(expenseData)
     setEnteredTitle('')
     setEnteredDate('')
     setEnteredAmount('')
