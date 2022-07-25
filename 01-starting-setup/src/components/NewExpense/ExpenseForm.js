@@ -29,14 +29,10 @@ function ExpenseForm(props) {
     setEnteredTitle('')
     setEnteredDate('')
     setEnteredAmount('')
-    resetForm()
+    props.hideForm()
   }
 
-  function resetForm() {
-    props.reset()
-  }
-
-  return <form action="" onSubmit={submitHandler} onReset={resetForm}>
+  return <form action="" onSubmit={submitHandler}>
     <div className={'new-expense__controls'}>
       <div className={'new-expense__control'}>
         <label htmlFor={'title'}>Title</label>
@@ -54,7 +50,7 @@ function ExpenseForm(props) {
       </div>
     </div>
     <div className={'new-expense__actions'}>
-      <button type={'reset'}>Cancel</button>
+      <button type={'button'} onClick={props.hideForm}>Cancel</button>
       <button type={'submit'}>Add Expense</button>
     </div>
   </form>

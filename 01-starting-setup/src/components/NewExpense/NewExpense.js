@@ -5,7 +5,7 @@ import {useState} from "react";
 
 
 function NewExpense(props) {
-  const [active, setActive] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
 
   function addExpenseHandler(expense) {
     expense = {
@@ -15,22 +15,22 @@ function NewExpense(props) {
     props.onAddExpense(expense)
   }
 
-  function renderExpenseForm() {
-    setActive(true)
+  function showExpenseForm() {
+    setFormOpen(true)
   }
 
   function hideExpenseForm() {
-    setActive(false)
+    setFormOpen(false)
   }
 
-  if (active) {
+  if (formOpen) {
     return <div className={'new-expense'}>
-      <ExpenseForm onSaveExpenseForm={addExpenseHandler} reset={hideExpenseForm}/>
+      <ExpenseForm onSaveExpenseForm={addExpenseHandler} hideForm={hideExpenseForm}/>
     </div>
   }
 
   return <div className={'new-expense'}>
-    <button type={'button'} onClick={renderExpenseForm}>Add New Expense</button>
+    <button type={'button'} onClick={showExpenseForm}>Add New Expense</button>
   </div>
 }
 
