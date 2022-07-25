@@ -29,9 +29,14 @@ function ExpenseForm(props) {
     setEnteredTitle('')
     setEnteredDate('')
     setEnteredAmount('')
+    resetForm()
   }
 
-  return <form action="" onSubmit={submitHandler}>
+  function resetForm() {
+    props.reset()
+  }
+
+  return <form action="" onSubmit={submitHandler} onReset={resetForm}>
     <div className={'new-expense__controls'}>
       <div className={'new-expense__control'}>
         <label htmlFor={'title'}>Title</label>
@@ -39,15 +44,18 @@ function ExpenseForm(props) {
       </div>
       <div className={'new-expense__control'}>
         <label htmlFor="amount">Amount</label>
-        <input name={'amount'} value={enteredAmount} type="number" min={0.01} step={0.01} onChange={amountChangeHandler}/>
+        <input name={'amount'} value={enteredAmount} type="number" min={0.01} step={0.01}
+               onChange={amountChangeHandler}/>
       </div>
       <div className={'new-expense__control'}>
         <label htmlFor="date">Date</label>
-        <input name={'date'} value={enteredDate} type="date" min={'2019-01-01'} max={'2022-12-31'} onChange={dateChangeHandler}/>
+        <input name={'date'} value={enteredDate} type="date" min={'2019-01-01'} max={'2022-12-31'}
+               onChange={dateChangeHandler}/>
       </div>
-      <div className={'new-expense__actions'}>
-        <button type={'submit'}>Add Expense</button>
-      </div>
+    </div>
+    <div className={'new-expense__actions'}>
+      <button type={'reset'}>Cancel</button>
+      <button type={'submit'}>Add Expense</button>
     </div>
   </form>
 }
