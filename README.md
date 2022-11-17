@@ -22,3 +22,8 @@ Projects for Udemy course "React - The Complete Guide"
       form.addEventListener("submit", handleSubmit)
   </script>
   ```
+  `formData.get("name")` works though ;). Expected to see a fancier output
+* `ReactDOM.createProtal` to create modals
+* "ref"s to handle form input
+* React actively runs the entire component function when it renders, so don't put in any long running commands, like an API fetch
+* `useEffect` executes only when dependencies change
