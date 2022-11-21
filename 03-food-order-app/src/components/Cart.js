@@ -6,7 +6,7 @@ function Cart(props) {
   return <div>
     <h2>Cart</h2>
     <ul>
-      {ctx.cartItems.map((el, idx) => <li key={idx}>{el.name}</li>)}
+      {ctx.cartItems.map((el, idx) => <li key={idx}>{el.name} {`(${el.amount})`}</li>)}
     </ul>
     <span>Total: {ctx.totalAmount}</span>
   </div>
