@@ -33,3 +33,6 @@ Projects for Udemy course "React - The Complete Guide"
 * The return value of the `useEffect` callback function is executed only the second time the useEffect is triggered
 * `useReducer` is used when more complex state transitions occur, that are too complex to handle with `useState`
 * React Context is not optimized for high frequency state changes
+* use `React.memo` to omit the rerendering of child components, when the properties do not change. 
+  This makes sense for avoiding re-rendering of entire branches, not for every component, since this comes with an overhead too
+* state updates are scheduled by react, even in batches (called "state Batching"), when multiple state updates happen in the same function
