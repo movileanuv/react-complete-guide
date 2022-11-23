@@ -36,3 +36,6 @@ Projects for Udemy course "React - The Complete Guide"
 * use `React.memo` to omit the rerendering of child components, when the properties do not change. 
   This makes sense for avoiding re-rendering of entire branches, not for every component, since this comes with an overhead too
 * state updates are scheduled by react, even in batches (called "state Batching"), when multiple state updates happen in the same function
+* React Context not suitable for high frequency changes
+* Components don't directly manipulate data in store. They dispatch actions, actions are interpreted by reducers, which manipulate the data in store
+* never mutate existing state, always create a new object based on the old state
