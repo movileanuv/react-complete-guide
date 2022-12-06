@@ -1,22 +1,34 @@
-const redux = require("redux")
+const reduxToolkit = require('@reduxjs/toolkit'),
+  createSlice = reduxToolkit.createSlice,
+  configureStore = reduxToolkit.configureStore
 
 const initialState = {counter: 0, showCounter: true}
 
-function counterReducer(state = initialState, action) {
-  if (action.type === 'increment') return {...state, counter: state.counter + 1}
-  if (action.type === 'decrement') return {...state, counter: state.counter - 1}
-  if (action.type === 'increase') return {...state, counter: state.counter + action.amount}
-  if (action.type === 'toggle') return {...state, showCounter: !state.showCounter}
-}
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment(state) {state.counter++},
+    decrement(state) {state.counter--},
+    increase(state, action) {state.counter += action.payload},
+    toggle(state) {state.showCounter = !state.showCounter}
+  }
+})
 
-const store = redux.createStore(counterReducer)
+const {increment, decrement, increase, toggle} = counterSlice.actions
+
+const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer
+  }
+})
 
 function counterSubscriber() {
   const latestState = store.getState()
-  console.log(latestState)
+  console.log(latestState.counter)
 }
 
 store.subscribe(counterSubscriber)
-store.dispatch({type: 'increment'})
-store.dispatch({type: 'increase', amount: 5})
-store.dispatch({type: 'toggle'})
+store.dispatch(increment())
+store.dispatch(increase(5))
+store.dispatch(toggle())
