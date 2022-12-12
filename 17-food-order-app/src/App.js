@@ -8,7 +8,11 @@ function App() {
   const [products, updateProducts] = useState([])
 
   useEffect(() => {
-    updateProducts(fetchProducts())
+    async function loadProducts() {
+      const products = await fetchProducts()
+      updateProducts(products)
+    }
+    loadProducts()
   }, [])
 
   return (
