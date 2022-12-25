@@ -43,12 +43,19 @@ function Cart(props) {
         {
           firstName: document.getElementById("first-name").value,
           lastName: document.getElementById("last-name").value,
-          email: document.getElementById("email").value
+          email: document.getElementById("email").value,
+          items: ctx.cartItems
         }
-      )
-      resetFirstName()
-      resetLastName()
-      resetEmail()
+      ).then(success => {
+        if (success) {
+          resetFirstName()
+          resetLastName()
+          resetEmail()
+          alert("Order was placed successfully")
+        } else {
+          alert("Order could not be placed")
+        }
+      })
     }
   }
 
