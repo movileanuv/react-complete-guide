@@ -17,6 +17,7 @@ function Cart(props) {
   const {
     value: firstNameValue,
     isValid: isFirstNameValid,
+    hasError: firstNameHasError,
     setValue: setFirstName,
     reset: resetFirstName,
     setTouched: touchFirstName
@@ -25,6 +26,7 @@ function Cart(props) {
   const {
     value: lastNameValue,
     isValid: isLastNameValid,
+    hasError: lastNameHasError,
     setValue: setLastName,
     reset: resetLastName,
     setTouched: touchLastName
@@ -33,6 +35,7 @@ function Cart(props) {
   const {
     value: emailValue,
     isValid: isEmailValid,
+    hasError: emailHasError,
     setValue: setEmail,
     reset: resetEmail,
     setTouched: touchEmail
@@ -41,7 +44,7 @@ function Cart(props) {
   function handleFormSubmit(evt) {
     evt.preventDefault()
 
-    if (isFirstNameValid & isLastNameValid & isEmailValid) {
+    if (isFirstNameValid && isLastNameValid && isEmailValid && ctx.cartItems.length > 0) {
       placeOrder(
         {
           firstName: document.getElementById("first-name").value,
@@ -51,6 +54,7 @@ function Cart(props) {
         }
       ).then(success => {
         if (success) {
+          ctx.reset()
           resetFirstName()
           resetLastName()
           resetEmail()
@@ -59,6 +63,8 @@ function Cart(props) {
           alert("Order could not be placed")
         }
       })
+    } else {
+      alert("Invalid Cart")
     }
   }
 
@@ -69,19 +75,19 @@ function Cart(props) {
     </ul>
     <span>Total: {ctx.totalAmount}</span>
     <form onSubmit={handleFormSubmit}>
-      <div style={{backgroundColor: isFirstNameValid ? "transparent" : "orange"}}>
+      <div style={{backgroundColor: firstNameHasError ? "orange" : "transparent"}}>
         <label htmlFor="first-name">First Name:&nbsp;</label>
         <input id="first-name" name="first-name" type="text" onBlur={() => touchFirstName(true)}
                value={firstNameValue}
                onChange={evt => setFirstName(evt.target.value)}/>
       </div>
-      <div style={{backgroundColor: isLastNameValid ? "transparent" : "orange"}}>
+      <div style={{backgroundColor: lastNameHasError ? "orange" : "transparent"}}>
         <label htmlFor="last-name">Last Name:&nbsp;</label>
         <input id="last-name" name="last-name" type="text" onBlur={() => touchLastName(true)}
                value={lastNameValue}
                onChange={evt => setLastName(evt.target.value)}/>
       </div>
-      <div style={{backgroundColor: isEmailValid ? "transparent" : "orange"}}>
+      <div style={{backgroundColor: emailHasError ? "orange" : "transparent"}}>
         <label htmlFor="email">Address:&nbsp;</label>
         <input id="email" name="email" type="email" onBlur={() => touchEmail(true)}
                value={emailValue}

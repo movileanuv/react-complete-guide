@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import CartContext from "../store/cart-context";
 
 export default function ProductItem({item}) {
@@ -23,6 +23,12 @@ export default function ProductItem({item}) {
     ctx.updateCart(item, amount)
     setInputValue(amount)
   }
+
+  // set to 0 when cart is empty (e.g. order submit)
+  const isCartEmpty = ctx.cartItems.length === 0
+  useEffect(() => {
+    if (isCartEmpty) setInputValue(0)
+  }, [isCartEmpty])
 
   return <li>
     <b>{item.name}</b>: {item.price}€

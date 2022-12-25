@@ -3,7 +3,8 @@ import React, {useMemo, useState} from "react";
 const CartContext = React.createContext({
   cartItems: [],
   totalAmount: NaN,
-  updateCart: (item, amount) => {}
+  updateCart: (item, amount) => {},
+  reset: () => {}
 })
 
 export function CartContextProvider(props) {
@@ -32,10 +33,15 @@ export function CartContextProvider(props) {
     recalculateTotal(prev => !prev)
   }
 
+  function reset() {
+    updateCartItems([])
+  }
+
   return <CartContext.Provider value={{
     cartItems: cartItems,
     totalAmount: total,
-    updateCart
+    updateCart,
+    reset
   }}>{props.children}</CartContext.Provider>
 }
 
