@@ -15,6 +15,7 @@ function validateEmail(value) {
 function Cart(props) {
   const ctx = useContext(CartContext)
   const {
+    value: firstNameValue,
     isValid: isFirstNameValid,
     setValue: setFirstName,
     reset: resetFirstName,
@@ -22,6 +23,7 @@ function Cart(props) {
   } = useInput(validateName)
 
   const {
+    value: lastNameValue,
     isValid: isLastNameValid,
     setValue: setLastName,
     reset: resetLastName,
@@ -29,6 +31,7 @@ function Cart(props) {
   } = useInput(validateName)
 
   const {
+    value: emailValue,
     isValid: isEmailValid,
     setValue: setEmail,
     reset: resetEmail,
@@ -69,16 +72,19 @@ function Cart(props) {
       <div style={{backgroundColor: isFirstNameValid ? "transparent" : "orange"}}>
         <label htmlFor="first-name">First Name:&nbsp;</label>
         <input id="first-name" name="first-name" type="text" onBlur={() => touchFirstName(true)}
+               value={firstNameValue}
                onChange={evt => setFirstName(evt.target.value)}/>
       </div>
       <div style={{backgroundColor: isLastNameValid ? "transparent" : "orange"}}>
         <label htmlFor="last-name">Last Name:&nbsp;</label>
         <input id="last-name" name="last-name" type="text" onBlur={() => touchLastName(true)}
+               value={lastNameValue}
                onChange={evt => setLastName(evt.target.value)}/>
       </div>
       <div style={{backgroundColor: isEmailValid ? "transparent" : "orange"}}>
         <label htmlFor="email">Address:&nbsp;</label>
         <input id="email" name="email" type="email" onBlur={() => touchEmail(true)}
+               value={emailValue}
                onChange={evt => setEmail(evt.target.value)}/>
       </div>
       <button>Place Order</button>

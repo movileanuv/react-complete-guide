@@ -1,15 +1,16 @@
 import {useState} from "react";
 
 function useInput(validateInput) {
-  const [enteredValue, setValue] = useState('')
+  const [value, setValue] = useState('')
   const [touched, setTouched] = useState(false)
-  const isValid = validateInput(enteredValue) | !touched
+  const isValid = validateInput(value) | !touched
 
   function reset() {
     setValue('')
     setTouched(false)
   }
   return {
+    value,
     setValue,
     setTouched,
     reset,
