@@ -20,6 +20,10 @@ export default function ProductItem({item}) {
 
   function setAmount(evt) {
     const amount = evt.target.value
+    if (amount < 0) {
+      setInputValue(0)
+      return
+    }
     ctx.updateCart(item, amount)
     setInputValue(amount)
   }
