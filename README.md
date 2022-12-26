@@ -19,3 +19,10 @@ Projects for Udemy course "React - The Complete Guide"
 * state updates are scheduled by react, even in batches (called "state Batching"), when multiple state updates happen in the same function
 * Components don't directly manipulate data in store. They dispatch actions, actions are interpreted by reducers, which manipulate the data in store
 * never mutate existing state, always create a new object based on the old state
+* mock fetch function:
+  ```javascript
+  window.fetch = jest.fn()
+  window.fetch.mockResolvedValueOnce({
+    json: async () => [{"id": 1, "text": "hello!"}]
+  }) 
+  ```
